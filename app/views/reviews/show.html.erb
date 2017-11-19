@@ -1,6 +1,7 @@
-<p id="notice"><%= notice %></p>
-
-<p>
+<h2><%= @review.book.title %></h2>
+<p><%= @review.user.name %>: </p>
+<blockquote><%= @review.description %></blockquote>
+<!-- <p>
   <strong>User:</strong>
   <%= @review.user %>
 </p>
@@ -13,7 +14,7 @@
 <p>
   <strong>Description:</strong>
   <%= @review.description %>
-</p>
+</p> -->
 
-<%= link_to 'Edit', edit_review_path(@review) %> |
+<%= link_to 'Edit', edit_book_review_path(@review.book, @review) %> |
 <%= link_to 'Back', reviews_path %>

@@ -14,6 +14,7 @@
         <td><%= book.title %></td>
         <td><%= book.author %></td>
         <td class="text-right">
+          <%= link_to 'Review', new_book_review_path(book), :class => 'btn btn-link btn-xs' %>
           <%= link_to 'Edit', edit_book_path(book), :class => 'btn btn-link btn-xs' %>
           <%= link_to 'Delete', book_path(book), :class => 'btn btn-xs btn-danger',
                           :method => :delete, :data => { :confirm => 'Are you sure?' } %>
@@ -23,4 +24,5 @@
   </tbody>
 </table>
 <%= paginate @books %>
+<br>
 <%= link_to 'New Book', new_book_path, :class => 'btn btn-primary' %>

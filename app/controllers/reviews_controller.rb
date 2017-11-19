@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :edit, :update, :destroy]
+  before_action :set_book, only: [:show, :new, :create, :edit, :update]
 
   # GET /reviews
   # GET /reviews.json
@@ -28,7 +29,7 @@ class ReviewsController < ApplicationController
 
     respond_to do |format|
       if @review.save
-        format.html { redirect_to @review, notice: 'Review was successfully created.' }
+        format.html { redirect_to [@book, @review], notice: 'Review was successfully created.' }
         format.json { render :show, status: :created, location: @review }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class ReviewsController < ApplicationController
   def update
     respond_to do |format|
       if @review.update(review_params)
-        format.html { redirect_to @review, notice: 'Review was successfully updated.' }
+        format.html { redirect_to [@book, @review], notice: 'Review was successfully updated.' }
         format.json { render :show, status: :ok, location: @review }
       else
         format.html { render :edit }
@@ -67,8 +68,15 @@ class ReviewsController < ApplicationController
       @review = Review.find(params[:id])
     end
 
+    def set_book
+      @book = Book.find(params[:book_id])
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def review_params
-      params.require(:review).permit(:user_id, :book_id, :description)
+      permitted_review_params = params.require(:review).permit(:description)
+      permitted_review_params[:user] = current_user
+      permitted_review_params[:book] = @book
+      permitted_review_params
     end
 end

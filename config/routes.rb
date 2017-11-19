@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :reviews
   resources :reviews, only: [:index, :destroy]
   root 'books#index'
   resources :books do

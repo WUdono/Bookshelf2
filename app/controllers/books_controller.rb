@@ -61,6 +61,10 @@ class BooksController < ApplicationController
     end
   end
 
+  def my_books
+    @books = current_user.books.page params[:page]
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_book

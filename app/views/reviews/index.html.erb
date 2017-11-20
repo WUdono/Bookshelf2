@@ -24,13 +24,10 @@
         <td class = "text-right">
           <%= link_to 'Edit', edit_book_review_path(review.book, review), :class => 'btn btn-default btn-xs' %>
           <%= link_to 'Destroy', review_path(review), :class => 'btn btn-xs btn-danger',
-              method: => :delete, :data { confirm: 'Are you sure?' } %>
+              :method => :delete, :data => 'Are you sure?' %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 <%= paginate @reviews %>
-<!-- <br> -->
-
-<!-- <%= link_to 'New Review', new_review_path %> -->

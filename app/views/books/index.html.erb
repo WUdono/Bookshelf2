@@ -1,28 +1,11 @@
 <h1>Books</h1>
-
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Author</th>
-      <th>&nbsp;</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @books.each do |book| %>
-      <tr>
-        <td><%= book.title %></td>
-        <td><%= book.author %></td>
-        <td class="text-right">
-          <%= link_to 'Review', new_book_review_path(book), :class => 'btn btn-link btn-xs' %>
-          <%= link_to 'Edit', edit_book_path(book), :class => 'btn btn-link btn-xs' %>
-          <%= link_to 'Delete', book_path(book), :class => 'btn btn-xs btn-danger',
-                          :method => :delete, :data => { :confirm => 'Are you sure?' } %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<form action="<%= books_path %>" method="get" class="form-inline">
+  <input class="form-control" type="text" name="s_title" value="<%= request[:s_title] %>">
+  <% options = options_for_select(Category.all.map{|c| [c.name, c.id]}, request[:s_category]) %>
+  <%= select_tag(:s_category, options, { include_blank: true, class: 'form-control'}) %>
+  <button class="btn btn-default" type="submit">検索</button>
+</form>
+<%= render 'table', books: @books %>
 <%= paginate @books %>
 <br>
 <%= link_to 'New Book', new_book_path, :class => 'btn btn-primary' %>

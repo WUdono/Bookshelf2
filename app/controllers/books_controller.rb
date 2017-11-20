@@ -5,6 +5,7 @@ class BooksController < ApplicationController
   # GET /books.json
   def index
     @books = Book.page(params[:page])
+    @books = @books.search(s_title: params[:s_title], s_category: params[:s_category]) if params[:s_title].present? || params[:s_category].present?
   end
 
   # GET /books/1

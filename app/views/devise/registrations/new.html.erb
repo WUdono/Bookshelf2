@@ -21,6 +21,10 @@
         <%= f.label :password_confirmation %>
         <%= f.password_field :password_confirmation, class: "form-control" %>
       </div>
+      <div class="form-group">
+        <%= f.label :role%>
+        <%= f.select :role, {"一般ユーザー" => "member", "管理者" => "admin"}, class: "form-controle" %>
+      </div>
       <%= f.submit t('.sign_up', :default => "Sign up"), class: "btn btn-primary" %>
     <% end %>
   </div>

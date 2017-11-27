@@ -10,13 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171127075729) do
+ActiveRecord::Schema.define(version: 20171127085830) do
 
   create_table "books", force: :cascade do |t|
     t.string   "title"
     t.string   "author"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "publisherName"
+    t.string   "salesDate"
+    t.string   "mediumImageUrl"
+    t.string   "isbn"
+    t.integer  "rental_count"
   end
 
   create_table "books_categories", id: false, force: :cascade do |t|
@@ -30,6 +35,27 @@ ActiveRecord::Schema.define(version: 20171127075729) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "logs", force: :cascade do |t|
+    t.datetime "rental_date"
+    t.datetime "return_date"
+    t.integer  "book_id"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "rentals", force: :cascade do |t|
+    t.datetime "rental_date"
+    t.integer  "Book_id"
+    t.integer  "User_id"
+    t.integer  "Log_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["Book_id"], name: "index_rentals_on_Book_id"
+    t.index ["Log_id"], name: "index_rentals_on_Log_id"
+    t.index ["User_id"], name: "index_rentals_on_User_id"
   end
 
   create_table "reviews", force: :cascade do |t|

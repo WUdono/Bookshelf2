@@ -55,10 +55,14 @@ class BooksController < ApplicationController
   # DELETE /books/1
   # DELETE /books/1.json
   def destroy
-    @book.destroy
-    respond_to do |format|
-      format.html { redirect_to books_url, notice: 'Book was successfully destroyed.' }
-      format.json { head :no_content }
+    if @book.Rental_id.nil?
+      @book.destroy
+      respond_to do |format|
+        format.html { redirect_to books_url, notice: 'Book was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to book_path, notice: "その本は貸し出し中のため削除できません。"
     end
   end
 
@@ -74,6 +78,6 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:title, :author, category_ids: [])
+      params.require(:book).permit(:title, :author, :publisherName, :salesDate, :isbn, category_ids: [])
     end
 end

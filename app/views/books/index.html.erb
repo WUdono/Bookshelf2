@@ -1,4 +1,4 @@
-<h1>Books</h1>
+<h1>本棚</h1>
 <form action="<%= books_path %>" method="get" class="form-inline">
   <input class="form-control" type="text" name="s_title" value="<%= request[:s_title] %>">
   <% options = options_for_select(Category.all.map{|c| [c.name, c.id]}, request[:s_category]) %>

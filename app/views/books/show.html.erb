@@ -11,16 +11,13 @@
     <td width="100", class="info">著者</td> <td><%= @book.author %></td>
     </tr>
     <tr>
-    <td width="100", class="info">出版社</td> <td><%= @book.manufacturer %></td>
+    <td width="100", class="info">出版社</td> <td><%= @book.publisherName %></td>
     </tr>
     <tr>
-    <td width="100", class="info">出版日</td> <td><%= @book.publication_date %></td>
+    <td width="100", class="info">出版日</td> <td><%= @book.salesDate %></td>
     </tr>
     <tr>
     <td width="100", class="info">ISBN</td> <td><%= @book.isbn %></td>
     </tr>
   </tbody>
 </table>
-
-<%= link_to 'Edit', edit_book_path(@book) %> |
-<%= link_to 'Back', books_path %>
